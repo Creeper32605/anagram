@@ -1,3 +1,5 @@
+'use strict';
+
 let countChars = function countChars(inp) {
 	let chars = {};
 	for (let char of inp.toUpperCase()) {
@@ -75,8 +77,8 @@ let updateCanvas = function() {
 	let chars = {};
 	for (let i of inp1.value) {
 		ctx.fillText(i, (7 + index * 12) * dp, dp * 16);
-		if (!(i in chars)) chars[i] = [index];
-		else chars[i].push(index);
+		if (!(i in chars)) chars[i.toLowerCase()] = [index];
+		else chars[i.toLowerCase()].push(index);
 		index++;
 	}
 	index = 0;
@@ -85,9 +87,9 @@ let updateCanvas = function() {
 	ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
 	for (let i of inp2.value) {
 		ctx.fillText(i, (7 + index * 12) * dp, height - (dp * 5));
-		if (!i.match(/^\W$/) && chars[i] && chars[i].length) {
-			let ci = chars[i][0];
-			chars[i].splice(0, 1);
+		if (!i.match(/^\W$/) && chars[i.toLowerCase()] && chars[i.toLowerCase()].length) {
+			let ci = chars[i.toLowerCase()][0];
+			chars[i.toLowerCase()].splice(0, 1);
 			ctx.beginPath();
 			let x1 = (7 + index * 12) * dp;
 			let y1 = height - (dp * 20);
