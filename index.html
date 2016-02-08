@@ -6,11 +6,17 @@
 		<link rel="stylesheet" href="index.css">
 	</head>
 	<body>
-		<input id="ana1">
-		<input id="ana2">
-		<span id="status">No Input</span><br>
-		<table id="err-table"></table>
-		<canvas id="an-canvas"></canvas>
+		<div id="inputs">
+			<input class="ana-input" id="ana1" placeholder="Enter Text" autocomplete="off">
+			<input class="ana-input" id="ana2" placeholder="Enter Text" autocomplete="off">
+		</div>
+		<div id="outputs">
+			<div id="st-out">
+				<span id="status">No Input</span><br>
+				<table id="err-table"></table>
+			</div>
+			<canvas id="an-canvas"></canvas>
+		</div>
 		<script src="index.js"></script>
 	</body>
 </html>

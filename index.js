@@ -57,22 +57,21 @@ Object.defineProperty(window, 'dp', {
 		return window.devicePixelRatio;
 	}
 });
+let checkValidity;
 let resizeCanvas = function() {
-	canv.width = innerWidth * dp;
-	canv.height = 200 * dp;
-	canv.style.width = innerWidth + 'px';
-	canv.style.height = 200 + 'px';
+	canv.width = parseInt(getComputedStyle(canv).width) * dp;
+	canv.height = parseInt(getComputedStyle(canv).height) * dp;
+	checkValidity();
 };
 let ctx = canv.getContext('2d');
-resizeCanvas();
-window.resize = resizeCanvas;
+window.addEventListener('resize', resizeCanvas);
 
 let updateCanvas = function() {
 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.fillStyle = '#000000';
 	ctx.font = (dp * 16) + 'px monospace';
 	ctx.textAlign = 'center';
-	let height = 150 * dp;
+	let height = Math.min(canv.height, 150 * dp);
 	let index = 0;
 	let chars = {};
 	for (let i of inp1.value) {
@@ -103,7 +102,7 @@ let updateCanvas = function() {
 	}
 };
 
-let checkValidity = function checkValidity() {
+checkValidity = function checkValidity() {
 	let i1 = countChars(inp1.value);
 	let i2 = countChars(inp2.value);
 	errt.innerHTML = '';
@@ -145,6 +144,8 @@ let checkValidity = function checkValidity() {
 	}
 	updateCanvas();
 };
+resizeCanvas();
+resizeCanvas();
 
 inp1.addEventListener('keyup', checkValidity);
 inp2.addEventListener('keyup', checkValidity);
